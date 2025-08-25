@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promosi KGAME99</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #ffce54;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0d6ff;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4fc1e9;
+            text-shadow: 0 0 15px rgba(79, 193, 233, 0.7);
+            margin: 20px 0;
+        }
+        
+        .bonus-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .bonus-card {
+            background: linear-gradient(145deg, #2a2a48, #1c1c33);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bonus-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ffce54, #4fc1e9, #a0d6ff);
+        }
+        
+        .bonus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .bonus-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffce54;
+            margin-bottom: 15px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+        
+        .bonus-details {
+            list-style-type: none;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .bonus-details li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .bonus-details li:last-child {
+            border-bottom: none;
+        }
+        
+        .withdraw-condition {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #4fc1e9;
+            margin-top: 20px;
+            border-left: 4px solid #ffce54;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #a0d6ff;
+            font-size: 0.9rem;
+        }
+        
+        .highlight {
+            color: #ffce54;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .bonus-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">KGAME99</div>
+            <h1>Promosi Terkini</h1>
+            <p class="subtitle">Dapatkan bonus menarik untuk permainan yang lebih seru!</p>
+        </header>
+        
+        <div class="bonus-container">
+            <div class="bonus-card">
+                <div class="bonus-title">A - Welcome Bonus 50%</div>
+                <div class="bonus-title">A - Welcome Back Bonus 50%</div>
+                <ul class="bonus-details">
+                    <li>MIN DEPOSIT RM30 DAPAT FREE RM15 = 45</li>
+                </ul>
+                <div class="withdraw-condition">Withdraw: Bonus ditolak semasa cuci</div>
+            </div>
+
+            <div class="bonus-card">
+                <div class="bonus-title">B - Welcome Bonus 80%</div>
+                <div class="bonus-title">B - Welcome Back Bonus 80%</div>
+                <ul class="bonus-details">
+                    <li>MIN DEPOSIT RM100 DAPAT FREE RM80 = 180</li>
+                </ul>
+                <div class="withdraw-condition">Withdraw: x4 Winover</div>
+            </div>
+
+            <div class="bonus-card">
+                <div class="bonus-title">C - Welcome Bonus 100%</div>
+                <div class="bonus-title">C - Welcome Back Bonus 100%</div>
+                <ul class="bonus-details">
+                    <li>MIN DEPOSIT RM200 DAPAT RM200 = 400</li>
+                </ul>
+                <div class="withdraw-condition">Withdraw: x5 Winover</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2018 KGAME99 - Semua hakcipta terpelihara</p>
+        </div>
+    </div>
+</body>
+</html>
