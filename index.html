@@ -508,19 +508,19 @@
             particle.style.animationDuration=`${duration}s`;
             particlesContainer.appendChild(particle);
         }
-    });
-
-    // Function to send Telegram message
-    function sendTelegramMessage() {
-        const message = encodeURIComponent("Nak claim KGAME99 REACTIVE Bonus https://tinyurl.com/KGAME99");
-        window.open(`https://t.me/kgame99?start=${message}`, '_blank');
-    }
-
-    // Function to send WhatsApp message
+<script>
+    // Fungsi kirim WhatsApp saja
     function sendWhatsAppMessage() {
         const message = encodeURIComponent("Nak claim KGAME99 REACTIVE Bonus https://tinyurl.com/KGAME99");
         window.open(`https://wa.me/601168442390?text=${message}`, '_blank');
     }
+</script>
+
+<!-- Contoh tombol WhatsApp -->
+<button onclick="sendWhatsAppMessage()" style="background:#25D366;color:white;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;">
+    📲 Claim via WhatsApp
+</button>
+    
 </script>
 
 </body>
