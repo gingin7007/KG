@@ -11,39 +11,418 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', sans-serif; }
-        body { background: linear-gradient(rgba(43, 10, 10, 0.85), rgba(43, 10, 10, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232b0a0a"/><path d="M0 0L100 100" stroke="%23a30000" stroke-width="1"/><path d="M100 0L0 100" stroke="%23a30000" stroke-width="1"/></svg>'); color:#fff; overflow-x:hidden; position:relative; min-height:100vh; background-attachment: fixed; }
+        /* Global Reset & Font */
+        * { 
+            margin:0; 
+            padding:0; 
+            box-sizing:border-box; 
+            font-family:'Montserrat', sans-serif; 
+        }
+        
+        body { 
+            background: linear-gradient(rgba(43, 10, 10, 0.85), rgba(43, 10, 10, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232b0a0a"/><path d="M0 0L100 100" stroke="%237a0000" stroke-width="1"/><path d="M100 0L0 100" stroke="%237a0000" stroke-width="1"/></svg>');
+            color:#fff; 
+            overflow-x:hidden; 
+            position:relative; 
+            min-height:100vh;
+            background-attachment: fixed;
+        }
+        
+        /* Lightning & Particle Background */
+        .lightning-container { 
+            position:fixed; 
+            top:0; 
+            left:0; 
+            width:100%; 
+            height:100%; 
+            pointer-events:none; 
+            z-index:-1; 
+            overflow:hidden; 
+        }
+        
+        .lightning { 
+            position:absolute; 
+            width:2px; 
+            height:100%; 
+            background:linear-gradient(to bottom, transparent, #ff0000, transparent); 
+            opacity:0; 
+            filter:blur(1px); 
+        }
+        
+        .lightning-1 { 
+            left:10%; 
+            animation:lightning-flash 8s infinite; 
+        }
+        
+        .lightning-2 { 
+            left:50%; 
+            animation:lightning-flash 12s infinite 2s; 
+        }
+        
+        .lightning-3 { 
+            left:85%; 
+            animation:lightning-flash 10s infinite 4s; 
+        }
+        
+        @keyframes lightning-flash {
+            0%,95%,100%{opacity:0;height:0;}
+            5%,10%{opacity:0.7;height:100%;}
+            15%,90%{opacity:0;height:100%;}
+        }
 
-        .lightning { background:linear-gradient(to bottom, transparent, #ff4d4d, transparent); }
-        .bonus-card { border:1px solid rgba(255, 50, 50, 0.4); }
-        .bonus-title { color:#ff4d4d; }
-        .bonus-title::before { color:#cc0000; }
-        .bonus-details li::before { color:#cc0000; }
-        .withdraw-condition { color:#ff8080; }
-        .withdraw-condition::before { color:#ff4d4d; }
-        header { border-bottom:2px solid #ff4d4d; }
-        .logo { color:#ff4d4d; text-shadow:0 0 20px rgba(255, 77, 77, 0.7); }
-        h1 { background: linear-gradient(to right, #ff4d4d, #cc0000); }
-        h2 { color:#ff3333; }
-        .date-badge { background:linear-gradient(90deg, #cc0000, #ff4d4d); box-shadow: 0 0 15px rgba(204, 0, 0, 0.5); }
-        .welcome-text { border-left:4px solid #ff4d4d; }
-        .note { background:rgba(255, 0, 0, 0.2); border:1px dashed rgba(255, 50, 50, 0.5); }
-        .limited-offer { background:linear-gradient(45deg, #cc0000, #ff4d4d); box-shadow:0 5px 20px rgba(204, 0, 0, 0.5); }
-        .claim-section { border:1px solid rgba(255, 50, 50, 0.4); }
-        .claim-title { color:#ff4d4d; }
-        .heart { color:#cc0000; }
+        .particles { 
+            position:fixed; 
+            top:0; 
+            left:0; 
+            width:100%; 
+            height:100%; 
+            pointer-events:none; 
+            z-index:-2; 
+        }
+        
+        .particle { 
+            position:absolute; 
+            border-radius:50%; 
+            background:rgba(255, 0, 0, 0.15); 
+            animation:float 20s infinite linear; 
+        }
+        
+        @keyframes float { 
+            0%{transform:translateY(0) rotate(0deg); opacity:1;} 
+            100%{transform:translateY(-100vh) rotate(720deg); opacity:0;} 
+        }
+
+        /* Container & Card */
+        .container { 
+            max-width:700px; 
+            margin:30px auto; 
+            background:rgba(35, 0, 0, 0.85); 
+            border-radius:20px; 
+            padding:35px; 
+            box-shadow:0 15px 40px rgba(0,0,0,0.6); 
+            backdrop-filter:blur(15px); 
+            border:1px solid rgba(255, 0, 0, 0.4); 
+            position:relative; 
+            overflow:hidden; 
+            z-index:1; 
+        }
+        
+        .container::before { 
+            content:''; 
+            position:absolute; 
+            top:-50%; 
+            left:-50%; 
+            width:200%; 
+            height:200%; 
+            background:radial-gradient(circle, rgba(255, 0, 0, 0.15) 0%, transparent 70%); 
+            animation:rotate 40s linear infinite; 
+            z-index:-1; 
+        }
+        
+        @keyframes rotate { 
+            0%{transform:rotate(0deg);} 
+            100%{transform:rotate(360deg);} 
+        }
+
+        /* Header */
+        header { 
+            text-align:center; 
+            margin-bottom:30px; 
+            padding-bottom:20px; 
+            border-bottom:2px solid #ff0000; 
+            position:relative; 
+        }
+        
+        .logo { 
+            font-size:2.8rem; 
+            font-weight:800; 
+            color: #ff0000;
+            letter-spacing:2px; 
+            display:inline-block; 
+            text-shadow:0 0 20px rgba(255, 0, 0, 0.7);
+            margin-bottom: 15px;
+        }
+        
+        h1 { 
+            font-size:2.5rem; 
+            background: linear-gradient(to right, #ff0000, #ff7700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight:700; 
+            margin-top:10px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        h2 { 
+            font-size:1.8rem; 
+            color:#ff5500; 
+            font-weight:600; 
+            margin-top:5px; 
+        }
+        
+        .date-badge { 
+            display:inline-block; 
+            background:linear-gradient(90deg, #ff0000, #ff5500); 
+            padding:10px 20px; 
+            border-radius:25px; 
+            font-size:1rem; 
+            margin-top:15px; 
+            font-weight:500; 
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+
+        /* Welcome Text */
+        .welcome-text { 
+            background:rgba(255, 50, 50, 0.15); 
+            padding:20px; 
+            border-radius:12px; 
+            margin-bottom:25px; 
+            line-height:1.7; 
+            border-left:4px solid #ff0000; 
+            font-size:1.1rem; 
+            box-shadow:0 5px 15px rgba(0,0,0,0.2); 
+        }
+
+        /* Bonus Cards */
+        .bonus-container { 
+            margin-bottom:30px; 
+        }
+        
+        .bonus-card { 
+            background:linear-gradient(to right, rgba(70, 0, 0, 0.7), rgba(50, 0, 0, 0.7)); 
+            border-radius:12px; 
+            padding:25px; 
+            margin-bottom:20px; 
+            border:1px solid rgba(255, 0, 0, 0.4); 
+            transition:all 0.3s ease; 
+            position:relative; 
+            overflow:hidden; 
+            box-shadow:0 8px 25px rgba(0,0,0,0.3); 
+        }
+        
+        .bonus-card::before { 
+            content:''; 
+            position:absolute; 
+            top:0; 
+            left:-100%; 
+            width:100%; 
+            height:100%; 
+            background:linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent); 
+            transition:0.5s; 
+        }
+        
+        .bonus-card:hover { 
+            transform:translateY(-8px); 
+            background:linear-gradient(to right, rgba(90, 0, 0, 0.8), rgba(70, 0, 0, 0.8)); 
+            box-shadow:0 12px 30px rgba(0,0,0,0.4); 
+        }
+        
+        .bonus-card:hover::before { 
+            left:100%; 
+        }
+        
+        .bonus-title { 
+            color:#ff0000; 
+            font-size:1.5rem; 
+            margin-bottom:15px; 
+            display:flex; 
+            align-items:center; 
+            font-weight:600; 
+        }
+        
+        .bonus-title::before { 
+            content:"★"; 
+            margin-right:12px; 
+            color:#ff0000; 
+            font-size:1.5rem; 
+        }
+        
+        .bonus-details { 
+            margin-left:25px; 
+            margin-bottom:15px; 
+        }
+        
+        .bonus-details li { 
+            margin-bottom:10px; 
+            list-style:none; 
+            display:flex; 
+            align-items:center; 
+            font-size:1.1rem; 
+        }
+        
+        .bonus-details li::before { 
+            content:"➤"; 
+            margin-right:12px; 
+            color:#ff5500; 
+            font-weight:bold; 
+        }
+        
+        .withdraw-condition { 
+            display:flex; 
+            align-items:center; 
+            margin-top:15px; 
+            padding-top:15px; 
+            border-top:1px dashed rgba(255, 0, 0, 0.3); 
+            font-weight:500; 
+            color:#ff5555; 
+        }
+        
+        .withdraw-condition::before { 
+            content:"✓"; 
+            margin-right:12px; 
+            color:#ff5555; 
+            font-weight:bold; 
+        }
+
+        /* Jackpot Section */
+        .jackpot-section {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            background: linear-gradient(45deg, rgba(255, 100, 0, 0.15), rgba(255, 50, 0, 0.15));
+            border-radius: 12px;
+            border: 1px solid rgba(255, 100, 0, 0.4);
+        }
+        
+        .jackpot-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff5500;
+            text-shadow: 0 0 10px rgba(255, 100, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        /* Notes & Limited Offer */
+        .note { 
+            text-align:center; 
+            padding:20px; 
+            background:rgba(255, 0, 0, 0.2); 
+            border-radius:12px; 
+            margin:25px 0; 
+            font-size:1rem; 
+            border:1px dashed rgba(255, 0, 0, 0.5); 
+            font-weight:500; 
+        }
+        
+        .limited-offer { 
+            text-align:center; 
+            background:linear-gradient(45deg, #ff0000, #ff5500); 
+            padding:15px; 
+            border-radius:12px; 
+            margin:25px 0; 
+            font-weight:700; 
+            font-size:1.2rem; 
+            animation:pulse 2s infinite; 
+            box-shadow:0 5px 20px rgba(255, 0, 0, 0.5); 
+        }
+        
+        @keyframes pulse { 
+            0%{transform:scale(1); box-shadow:0 5px 20px rgba(255, 0, 0, 0.5);} 
+            50%{transform:scale(1.03); box-shadow:0 8px 25px rgba(255, 50, 50, 0.7);} 
+            100%{transform:scale(1); box-shadow:0 5px 20px rgba(255, 0, 0, 0.5);} 
+        }
+
+        /* Claim Section */
+        .claim-section { 
+            background:rgba(45, 0, 0, 0.9); 
+            border-radius:15px; 
+            padding:25px; 
+            margin:30px 0; 
+            text-align:center; 
+            border:1px solid rgba(255, 0, 0, 0.4); 
+            box-shadow:0 8px 25px rgba(0,0,0,0.4); 
+        }
+        
+        .claim-title { 
+            font-size:1.4rem; 
+            color:#ff0000; 
+            margin-bottom:20px; 
+            font-weight:600; 
+            line-height: 1.5;
+        }
+        
+        .contact-methods { 
+            display:flex; 
+            justify-content:center; 
+            gap:25px; 
+            margin-top:20px; 
+            flex-wrap:wrap; 
+        }
+        
+        .contact-button { 
+            display:flex; 
+            align-items:center; 
+            gap:10px; 
+            padding:12px 25px; 
+            border-radius:50px; 
+            text-decoration:none; 
+            font-weight:600; 
+            transition:all 0.3s ease; 
+            box-shadow:0 5px 15px rgba(0,0,0,0.3); 
+        }
+        
+        .telegram { 
+            background:linear-gradient(45deg, #cc0000, #ff4400); 
+            color:white; 
+        }
+        
+        .whatsapp { 
+            background:linear-gradient(45deg, #d32525, #c71e1e); 
+            color:white; 
+        }
+        
+        .contact-button:hover { 
+            transform:translateY(-5px) scale(1.05); 
+            box-shadow:0 8px 20px rgba(0,0,0,0.4); 
+        }
+
+        /* Footer */
+        .footer { 
+            text-align:center; 
+            margin-top:35px; 
+            font-size:0.9rem; 
+            color:rgba(255,255,255,0.7); 
+        }
+        
+        .heart { 
+            color:#ff0000; 
+            display:inline-block; 
+            animation:heartbeat 1.5s infinite; 
+        }
+        
+        @keyframes heartbeat { 
+            0%{transform:scale(1);} 
+            50%{transform:scale(1.2);} 
+            100%{transform:scale(1);} 
+        }
+
+        /* Media Queries */
+        @media (max-width:600px) {
+            .container { padding:20px; }
+            .logo { font-size: 2.2rem; }
+            h1 { font-size:1.8rem; }
+            h2 { font-size:1.4rem; }
+            .bonus-title { font-size:1.3rem; }
+            .contact-methods { flex-direction:column; align-items:center; }
+            .contact-button { width:100%; justify-content:center; }
+        }
     </style>
 </head>
 <body>
 
+<!-- Lightning Background -->
 <div class="lightning-container">
     <div class="lightning lightning-1"></div>
     <div class="lightning lightning-2"></div>
     <div class="lightning lightning-3"></div>
 </div>
 
+<!-- Particles -->
 <div class="particles" id="particles"></div>
 
+<!-- Main Container -->
 <div class="container">
     <header>
         <div class="logo">KGAME99</div>
@@ -108,9 +487,11 @@
 </div>
 
 <script>
+    // Particles Background
     document.addEventListener('DOMContentLoaded', function() {
         const particlesContainer = document.getElementById('particles');
         const numberOfParticles = 60;
+
         for(let i=0;i<numberOfParticles;i++){
             const particle = document.createElement('div');
             particle.classList.add('particle');
@@ -129,11 +510,13 @@
         }
     });
 
+    // Function to send Telegram message
     function sendTelegramMessage() {
         const message = encodeURIComponent("Nak claim KGAME99 REACTIVE Bonus https://tinyurl.com/KGAME99");
         window.open(`https://t.me/kgame99?start=${message}`, '_blank');
     }
 
+    // Function to send WhatsApp message
     function sendWhatsAppMessage() {
         const message = encodeURIComponent("Nak claim KGAME99 REACTIVE Bonus https://tinyurl.com/KGAME99");
         window.open(`https://wa.me/601168442390?text=${message}`, '_blank');
